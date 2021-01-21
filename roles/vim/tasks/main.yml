@@ -1,0 +1,20 @@
+---
+- name: "Install silver searcher Ag"
+  yum:
+    name: the_silver_searcher
+    state: latest
+  become_user: root
+- name: "Create directory for Plug"
+  file:
+    path: ~/.vim/autoload
+    state: directory
+- name: "Clone Plug for vim"
+  get_url:
+    url: "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+    dest: "~/.vim/autoload/"
+- name: "Copy vimrc file"
+  copy:
+    src: files/.vimrc
+    dest: ~/.vimrc
+- name: "Install plugin from vimrc file"
+  shell: "vim +'PlugInstall --sync' +qa"

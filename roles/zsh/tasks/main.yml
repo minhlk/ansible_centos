@@ -1,0 +1,23 @@
+---
+- name: "Copy zshrc file"
+  copy:
+    src: files/.zshrc
+    dest: ~/.zshrc
+- name: "Install Zsh via yum"
+  yum:
+    name: zsh
+    state: latest
+- name: "Copy zsh plugin folder"
+  synchronize:
+    src: "files/.oh-my-zsh/"
+    dest: "~/.oh-my-zsh/"
+- name: "Change default shell to zsh"
+  shell: "chsh -s /bin/zsh"
+- name: "Handle insecure directory | folder not created by root or current user"
+  shell: chown -R "$(whoami)" /home/vagrant/.oh-my-zsh/custom/plugins/zsh-autosuggestions |
+         chown -R "$(whoami)" /home/vagrant/.oh-my-zsh/plugins/git |
+         chown -R "$(whoami)" /home/vagrant/.oh-my-zsh/custom/plugins |
+         chown -R "$(whoami)" /home/vagrant/.oh-my-zsh/plugins |
+         chown -R "$(whoami)" /home/vagrant/.oh-my-zsh |
+         chown -R "$(whoami)" /home/vagrant/.oh-my-zsh  
+  become: yes

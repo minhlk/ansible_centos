@@ -4,7 +4,7 @@
 - This is just a practice project, so if you want to use it in prod, please beware about security and know what you're doing.
 
 ## Definition
-[Definition](./Definitions.md)
+[Definition](./definition/README.md)
 ## Project Status
 
 On-going
